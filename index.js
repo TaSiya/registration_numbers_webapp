@@ -5,9 +5,19 @@ const session = require('express-session');
 const handle = require('express-handlebars');
 const bodyParser = require('body-parser');
 const pg = require('pg');
+const routes = require('./routes/plateRoutes');
 
 const app = express();
 const Pool = pg.Pool;
+
+app.use(session({
+    secret : "<add a secret string here>",
+    resave: false,
+    saveUninitialized: true
+  }));
+
+  // initialise the flash middleware
+  app.use(flash());
 
 app.use(express.static(__dirname + 'public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,11 +40,15 @@ const pool = new Pool({
     ssl: useSSL
 });
 
-app.get('/', function (req, res) {
-    res.render('index');
-}); 
+const PlateRoute = routes(pool);
 
+app.get('/', PlateRoute.home); 
 
+app.get('/report', PlateRoute.report)
+
+app.post('/reporting', PlateRoute.reporting)
+
+app.get('/allPlates', PlateRoute.plates)
 const PORT = 2018;
 app.listen(PORT, function () {
     console.log('Talk to me port... ' + PORT);

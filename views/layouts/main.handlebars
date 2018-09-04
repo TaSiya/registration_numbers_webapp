@@ -6,17 +6,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+    
+    <title>Registration App</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/registration_number.css">
-    <title>Registration App</title>
+    <link rel="stylesheet" href="/css/registration_number.css">
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="/"><img src="../img/logo.jpg" alt="logo"></a>
+            <a class="navbar-brand" href="/"><img src="/img/logo.jpg" alt="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -25,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/report">Report plate</a>
@@ -36,10 +37,10 @@
                             Plates 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">All plates</a>
-                            <a class="dropdown-item" href="#">Found plates</a>
+                            <a class="dropdown-item" href="/allPlates">All plates</a>
+                            <a class="dropdown-item" href="/found">Found plates</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Not found</a>
+                            <a class="dropdown-item" href="/NotFound">Not found</a>
                         </div>
                     </li>
                 </ul>
@@ -50,7 +51,11 @@
             </div>
         </nav>
     </header>
-    <div class="w-100"></div>
+    <div class="row bg-light text-light text-center mb-3">
+        <div class="col text-center ">
+            <h1 class=" text-success pt-3">{{heading}}</h1>
+        </div>
+    </div>
     {{{body}}}
     <footer>
         
