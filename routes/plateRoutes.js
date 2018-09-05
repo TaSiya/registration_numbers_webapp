@@ -6,7 +6,8 @@ module.exports = function (pool) {
     }
     async function report (req, res) {
         let heading = 'Hi, There. Our services are Free!'
-        res.render('report',{heading});
+        let stylePlate = 'found';
+        res.render('report',{heading,stylePlate});
     }
     async function reporting (req, res) {
         let name = req.body.username;
@@ -21,7 +22,9 @@ module.exports = function (pool) {
         try{
             let heading = 'Reported plates';
             let reg_plates = await Services.allPlates();
-            res.render('plates',{heading, reg_plates});
+            let stylePlate = 'found';
+            let counter = await Services.countAll();
+            res.render('plates',{heading, reg_plates, stylePlate, counter});
         } catch(err) {
             res.send(err.stack);
         }

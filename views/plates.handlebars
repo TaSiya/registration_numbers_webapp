@@ -1,7 +1,33 @@
-<div class="row">
-    <ul>
-        {{#each reg_plates}}
-            <li>{{plates}}</li>
-        {{/each}}
-    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h3>There are currently <span class="text-success ">{{counter}}</span> license plates in the database</h3>
+        </div>
+    </div>
+    <div class="w-100"></div>
+    <div class="row">
+        <div class="col">
+            <h5>All the plates will be represented by the Town in a table
+                </h>
+        </div>
+    </div>
+    <div class="w-100"></div>
+    <div class="row">
+        <div class="col text-center">
+            <table class="table">
+                <h4>All town</h4>
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">{{town_name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{plates}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
