@@ -1,13 +1,20 @@
-/* body{
-    width: 20%;
-}
-.showcase{
-    background-image: url(/img/logo.jpg);
-    
-} */
 
-.found{
+.showcase{
+    border-radius : 8px;
+    background-image: url(/img/cover2.jpg);
+    background-position-x: -400px;
+    background-position-y: -180px;
+    box-shadow: 3px 2px 0 rgba(0, 0, 0, 0.6)
+    
+    
+} 
+
+.logo{
+    border-radius : 3px;
+}
+
+/* .found{
     border-radius: 8px;
     border: solid 1px black;
     background-color: yellow;
-}
+} */

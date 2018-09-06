@@ -19,7 +19,7 @@ app.use(session({
   // initialise the flash middleware
   app.use(flash());
 
-app.use(express.static(__dirname + 'public'));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
