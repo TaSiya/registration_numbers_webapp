@@ -43,10 +43,11 @@ const pool = new Pool({
 const PlateRoute = routes(pool);
 
 app.get('/', PlateRoute.home); 
-app.get('/report', PlateRoute.report)
-app.post('/reporting', PlateRoute.reporting)
-// app.get('/allPlates', PlateRoute.plates)
-app.get('/allPlates', PlateRoute.combinedData)
+app.get('/report', PlateRoute.report);
+app.post('/reporting', PlateRoute.reporting);
+// app.get('/allPlates', PlateRoute.plates);
+app.get('/allPlates', PlateRoute.combinedData);
+app.get('/allPlates/:which', PlateRoute.foundOrNotFOund);
 const PORT = process.env.PORT || 2018;
 app.listen(PORT, function () {
     console.log('Talk to me port... ' + PORT);

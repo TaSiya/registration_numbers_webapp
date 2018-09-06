@@ -18,14 +18,15 @@ module.exports = function (pool) {
         let data = await pool.query('SELECT * FROM towns INNER JOIN registration_numbers ON towns.id = registration_numbers.towns_id');
         return data.rows;
     }
-    // async function filter (location) {
-    //     let loc = await pool.query('select * from towns where town_name= $1', [location])
-
-    // }
+    async function foundOrNot (search) {
+        let found = await pool.query('SELECT * FROM towns INNER JOIN registration_numbers ON towns.id = registration_numbers.towns_id WHERE status=$1',[search]);
+        return found.rows;
+    }
     
     return {
         platesData,
         countAll,
-        allData
+        allData,
+        foundOrNot
     }
 }

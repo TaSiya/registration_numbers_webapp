@@ -19,6 +19,7 @@
                     <th scope="col">Location</th>
                     <th scope="col">Plate</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Change status</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,7 @@
                     <td>{{town_name}}</td>
                     <td>{{plates}}</td>
                     <td>{{status}}</td>
+                    <td><a href="/allPlates/{{status}}">Switch</a></td>
                 </tr>
                 {{/each}}
             </tbody>

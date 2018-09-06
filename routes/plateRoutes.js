@@ -40,11 +40,31 @@ module.exports = function (pool) {
             res.send(err.stack)
         }
     }
+    async function foundOrNotFOund (req, res) {
+        try{
+            let decide = req.params.which;
+            let heading;
+            if(decide === 'found'){
+               heading = 'Found plates';
+            }
+            else{
+                decide = 'Not found'
+                heading = 'Not found plates';
+            }
+            
+            let listData = await Services.foundOrNot(decide);
+            let counter = listData.length;
+            res.render('plates', {heading, listData, counter})
+        } catch (err) {
+            res.send(err.stack)
+        }
+    }
     return {
         home,
         report,
         reporting,
         plates,
-        combinedData
+        combinedData,
+        foundOrNotFOund
     }
 }
