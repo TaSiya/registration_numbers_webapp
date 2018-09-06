@@ -45,7 +45,8 @@ const PlateRoute = routes(pool);
 app.get('/', PlateRoute.home); 
 app.get('/report', PlateRoute.report)
 app.post('/reporting', PlateRoute.reporting)
-app.get('/allPlates', PlateRoute.plates)
+// app.get('/allPlates', PlateRoute.plates)
+app.get('/allPlates', PlateRoute.combinedData)
 const PORT = process.env.PORT || 2018;
 app.listen(PORT, function () {
     console.log('Talk to me port... ' + PORT);

@@ -21,7 +21,7 @@ module.exports = function (pool) {
     async function plates (req, res) {
         try{
             let heading = 'Reported plates';
-            let reg_plates = await Services.allPlates();
+            let reg_plates = await Services.platesData();
             let stylePlate = 'found';
             let counter = await Services.countAll();
             res.render('plates',{heading, reg_plates, stylePlate, counter});
@@ -30,10 +30,21 @@ module.exports = function (pool) {
         }
         
     }
+    async function combinedData (req, res) {
+        try{
+            let heading = 'Combined plates';
+            let listData = await Services.allData();
+            let counter = await Services.countAll();
+            res.render('plates', {heading, listData, counter})
+        } catch (err) {
+            res.send(err.stack)
+        }
+    }
     return {
         home,
         report,
         reporting,
-        plates
+        plates,
+        combinedData
     }
 }
