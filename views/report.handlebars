@@ -1,19 +1,38 @@
 <div class="container">
-    
+
     <div class="row">
         <div class="col">
             <h5 class="mb-4">Fill in the registration number below.</h5>
             <div class="row">
-        <form action="/reporting" method="POST">
-            <div class="form-group">
-                <h3 for="exampleInputEmail1">License plate</h3>
-                <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter your registration plate" pattern='[A-Z]{2,3}\s\d{3}\W\d{3}|[A-Z]{2,3}\s\d{2,3}' title="Example: ENTER VALID PLATE">
-                <small id="emailHelp" class="form-text text-muted">Your registration plate will be share with eveyone</small>
+                <div class="col">
+                    <form action="/reporting" method="POST">
+                        <div class="form-group">
+                            <h3 for="exampleInputEmail1">License plate</h3>
+                            <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter your registration plate"
+                                pattern='[A-Z]{2,3}\s\d{3}\W\d{3}|[A-Z]{2,3}\s\d{2,3}' title="Example: ENTER VALID PLATE">
+                            <small id="emailHelp" class="form-text text-muted">Your registration plate will be share with
+                                eveyone</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="col">
+                    <div class="dropdown pt-5">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            select town {{town_name}}
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            {{#each town_list}}
+                            <a class="dropdown-item" href="/report/{{initials}}">{{town_name}}</a>
+                            {{/each}}
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        
-    </div>
         </div>
         <div class="col">
             <h5>How it works:</h5>
@@ -29,31 +48,17 @@
 
     <div class="row">
         <div class="col text-center">
-                <h3>{{messages.info}}</h3>
-                <h3 class="{{stylePlate}}">{{messages.found}}</h3>
+            <h3>{{messages.info}}</h3>
+            <h3 class="text-success">{{messages.found}}</h3>
         </div>
-        <div class="w-100"></div>
-     <div class="col">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                    select town
-                    {{town_name}}
-                </button>
-                
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {{#each town_list}}
-                    <a class="dropdown-item" href="/report/{{initials}}">{{town_name}}</a>
-                    {{/each}}
+        <div class="w-100 mb-5"></div>
+        <div class="col">
+                {{#each reg_plates}}
+                <div >
+                    <h4 class="col-2 border border-dark rounded bg-warning text-center">{{plates}}</h4>
                 </div>
-                
-                
-                <ul>
-                    {{#each reg_plates}}
-                    <li>{{plates}}</li>
-                    {{/each}}
-                </ul>
-                
-            </div>
+                <div class="w-100"></div>
+                {{/each}}
         </div>
     </div>
 </div>
