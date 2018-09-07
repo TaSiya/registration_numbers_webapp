@@ -12,6 +12,10 @@ module.exports = function (pool) {
         let town = await pool.query('select * from towns where initials = $1',[name]);
         return town.rows;
     }
+    async function selectPlate (plate) {
+        let result = await pool.query('select * from registration_numbers where plates =$1', [plate]);
+        return result.rows;
+    }
     async function townData () {
         let result = await pool.query('select * from towns');
         return result.rows;
@@ -37,6 +41,16 @@ module.exports = function (pool) {
     async function remove () {
         await pool.query('delete from registration_numbers');
     }
+    async function tryAddPlate (plate, id) {
+        let result = await selectPlate(plate);
+        if(result.length != 0) {
+            return false;
+        }
+        else{
+            await insertPlate(plate, id);
+            return true;
+        }
+    }
     
     return {
         platesData,
@@ -47,6 +61,7 @@ module.exports = function (pool) {
         filterByTown,
         selectTown,
         insertPlate,
-        remove
+        remove,
+        tryAddPlate
     }
 }

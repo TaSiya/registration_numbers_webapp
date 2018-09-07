@@ -9,7 +9,8 @@ module.exports = function (pool) {
         let stylePlate = 'found';
         let reg_plates = await Services.platesData();
         let town_list = await Services.townData();
-        res.render('report',{heading, reg_plates, stylePlate, town_list});
+        let town_name = 'all';
+        res.render('report',{heading, reg_plates, stylePlate, town_list,town_name});
     }
     async function reportFilter (req, res) {
         try{
@@ -22,6 +23,7 @@ module.exports = function (pool) {
             }
             let heading = 'Filtering by '+location ;
             let town_list = await Services.townData();
+            let town_name = ;
             res.render('report',{heading, reg_plates,town_list});
         } catch (err) { res.send(err.stack)}
         
@@ -32,12 +34,17 @@ module.exports = function (pool) {
             if(plate === '' || plate === undefined){
                 req.flash('info', "Please Enter a valid registration number")
             } else {
-                req.flash('found', plate)
+                
                 ////////?/ right here
                 let list = plate.split(' ');
                 let initial = list[0];
                 let town_list = await Services.selectTown(initial);
-                await Services.insertPlate(plate,town_list[0].id);
+                let flag = await Services.tryAddPlate(plate,town_list[0].id);
+                if(!flag){
+                    req.flash('info', 'Cannot enter plate that already exist')
+                } else {
+                    req.flash('found', plate)
+                }
             }
             res.redirect('report');
         } catch (err) { res.send(err.stack)}
