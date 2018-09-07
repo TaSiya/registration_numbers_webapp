@@ -8,6 +8,9 @@ module.exports = function (pool) {
         let filtered = await pool.query('select * from registration_numbers where plates LIKE $1', ['%'+town+' %']);
         return filtered.rows;
     }
+    async function selectTown (name) {
+        let town = await pool.query('select * from towns where initials = $1',[name]);
+    }
     async function townData () {
         let result = await pool.query('select * from towns');
         return result.rows;
@@ -37,6 +40,7 @@ module.exports = function (pool) {
         allData,
         foundOrNot,
         townData,
-        filterByTown
+        filterByTown,
+        selectTown
     }
 }
