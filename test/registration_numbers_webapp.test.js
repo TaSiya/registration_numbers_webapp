@@ -29,10 +29,10 @@ describe('Registratiob number Web Application test(s)', function () {
         });
         it('it should return 4 if not data', async function () {
             let Service = services(pool);
-            await Service.tryAddPlate('CA 123-321',1);
             await Service.tryAddPlate('CA 321-123',1);
-            await Service.tryAddPlate('CY 321-123',1);
-            await Service.tryAddPlate('CL 321-123',1);
+            await Service.tryAddPlate('CY 321-123',2);
+            await Service.tryAddPlate('CA 123-321',1);
+            await Service.tryAddPlate('CL 321-123',3);
             let result = await Service.countAll();
             assert.strictEqual(result, 4); 
         });
@@ -44,9 +44,9 @@ describe('Registratiob number Web Application test(s)', function () {
         it('checking for the plate CA 123-321',async function () {
             let Service = services(pool);
             await Service.tryAddPlate('CA 321-123',1);
-            await Service.tryAddPlate('CY 321-123',1);
+            await Service.tryAddPlate('CY 321-123',2);
             await Service.tryAddPlate('CA 123-321',1);
-            await Service.tryAddPlate('CL 321-123',1);
+            await Service.tryAddPlate('CL 321-123',3);
             let result = await Service.selectPlate('CA 123-321');
             let plate = result[0].plates;
             assert.strictEqual(plate, 'CA 123-321');
@@ -54,9 +54,9 @@ describe('Registratiob number Web Application test(s)', function () {
         it('checking for the plate CY 321-123', async function () {
             let Service = services(pool);
             await Service.tryAddPlate('CA 321-123',1);
-            await Service.tryAddPlate('CY 321-123',1);
+            await Service.tryAddPlate('CY 321-123',2);
             await Service.tryAddPlate('CA 123-321',1);
-            await Service.tryAddPlate('CL 321-123',1);
+            await Service.tryAddPlate('CL 321-123',3);
             let result = await Service.selectPlate('CY 321-123');
             let plate = result[0].plates;
             assert.strictEqual(plate, 'CY 321-123');
@@ -64,15 +64,40 @@ describe('Registratiob number Web Application test(s)', function () {
         it('checking for the plate CAW 321-123 return length zore since don\'t exist in the database', async function () {
             let Service = services(pool);
             await Service.tryAddPlate('CA 321-123',1);
-            await Service.tryAddPlate('CY 321-123',1);
+            await Service.tryAddPlate('CY 321-123',2);
             await Service.tryAddPlate('CA 123-321',1);
-            await Service.tryAddPlate('CL 321-123',1);
+            await Service.tryAddPlate('CL 321-123',3);
             let result = await Service.selectPlate('CAW 321-123');
             let plate = result.length;
             assert.strictEqual(plate, 0);
         });
     });
-
+    describe('linking both tables', function () {
+        beforeEach( async function () {
+            await pool.query('delete from registration_numbers');
+        })
+        it('should tell if the plate CA 123-321 is from Cape Town', async function () {
+            let Service = services(pool);
+            await Service.tryAddPlate('CA 321-123',1);
+            await Service.tryAddPlate('CY 321-123',2);
+            await Service.tryAddPlate('CA 123-321',1);
+            await Service.tryAddPlate('CL 321-123',3);
+            let plateData = await Service.selectJoinedTableData('CA 123-321');
+            let plate = plateData[0].town_name;
+            assert.strictEqual(plate, 'Cape Town');
+        });
+        it('should tell if the plate CY 321-123 is from Belville', async function () {
+            let Service = services(pool);
+            await Service.tryAddPlate('CA 321-123',1);
+            await Service.tryAddPlate('CY 321-123',2);
+            await Service.tryAddPlate('CA 123-321',1);
+            await Service.tryAddPlate('CL 321-123',3);
+            let plateData = await Service.selectJoinedTableData('CY 321-123');
+            let plate = plateData[0].town_name;
+            assert.strictEqual(plate, 'Belville');
+        });
+    });
+    
     after(function () {
         pool.end();
     });

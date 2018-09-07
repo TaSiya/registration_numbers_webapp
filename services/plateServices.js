@@ -34,6 +34,10 @@ module.exports = function (pool) {
         let data = await pool.query('SELECT * FROM towns INNER JOIN registration_numbers ON towns.id = registration_numbers.towns_id');
         return data.rows;
     }
+    async function selectJoinedTableData (plate) {
+        let data =await pool.query('SELECT * FROM towns INNER JOIN registration_numbers ON towns.id = registration_numbers.towns_id WHERE registration_numbers.plates=$1',[plate]);
+        return data.rows;
+    }
     async function foundOrNot (search) {
         let found = await pool.query('SELECT * FROM towns INNER JOIN registration_numbers ON towns.id = registration_numbers.towns_id WHERE status=$1',[search]);
         return found.rows;
@@ -63,6 +67,7 @@ module.exports = function (pool) {
         insertPlate,
         remove,
         tryAddPlate,
-        selectPlate
+        selectPlate,
+        selectJoinedTableData
     }
 }
