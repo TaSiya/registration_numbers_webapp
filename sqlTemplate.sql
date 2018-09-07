@@ -1,3 +1,4 @@
+DROP_EXISTING registration_numbers;
 
 create table towns(
 	id serial not null primary key,
