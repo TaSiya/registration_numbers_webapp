@@ -1,4 +1,4 @@
-DROP_EXISTING registration_numbers;
+DROP table registration_numbers, towns;
 
 create table towns(
 	id serial not null primary key,
