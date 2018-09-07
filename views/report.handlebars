@@ -7,7 +7,7 @@
         <form action="/reporting" method="POST">
             <div class="form-group">
                 <h3 for="exampleInputEmail1">License plate</h3>
-                <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter your registration plate">
+                <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter your registration plate" pattern='[A-Z]{2,3}\s\d{3}\W\d{3}|[A-Z]{2,3}\s\d{2,3}' title="Example: ENTER VALID PLATE">
                 <small id="emailHelp" class="form-text text-muted">Your registration plate will be share with eveyone</small>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
