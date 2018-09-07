@@ -4,6 +4,10 @@ module.exports = function (pool) {
         let result = await pool.query('select * from registration_numbers');
         return result.rows;
     }
+    async function filterByTown (town) {
+        let filtered = await pool.query('select * from registration_numbers where plates LIKE $1', ['%'+town+' %']);
+        return filtered.rows;
+    }
     async function townData () {
         let result = await pool.query('select * from towns');
         return result.rows;
@@ -16,7 +20,7 @@ module.exports = function (pool) {
         await pool.query('insert into registration_numbers (plates,towns_id,status) values ($1,$2,$3)',[plate,locationID,'Not found']);
     }
     async function updateStatus(plate, status){
-        await pool.query('update registration_numbers set status=$1 where plates=$2',[plate]);
+        await pool.query('update registration_numbers set status=$1 where plates=$2',[status, plate]);
     }
     async function allData () {    
         let data = await pool.query('SELECT * FROM towns INNER JOIN registration_numbers ON towns.id = registration_numbers.towns_id');
@@ -32,6 +36,7 @@ module.exports = function (pool) {
         countAll,
         allData,
         foundOrNot,
-        townData
+        townData,
+        filterByTown
     }
 }

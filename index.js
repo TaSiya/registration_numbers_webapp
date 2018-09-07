@@ -44,9 +44,8 @@ const PlateRoute = routes(pool);
 
 app.get('/', PlateRoute.home); 
 app.get('/report', PlateRoute.report);
-app.get('/report/:town', PlateRoute.report);
+app.get('/report/:town', PlateRoute.reportFilter);
 app.post('/reporting', PlateRoute.reporting);
-// app.get('/allPlates', PlateRoute.plates);
 app.get('/allPlates', PlateRoute.combinedData);
 app.get('/allPlates/:which', PlateRoute.foundOrNotFOund);
 const PORT = process.env.PORT || 2018;

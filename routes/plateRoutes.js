@@ -12,11 +12,19 @@ module.exports = function (pool) {
         res.render('report',{heading, reg_plates, stylePlate, town_list});
     }
     async function reportFilter (req, res) {
-        let location = req.params.town;
-
-        let heading = 'Filtering by '+location ;
-
-        res.render('report',{heading, reg_plates, stylePlate, town_list});
+        try{
+            let location = req.params.town;
+            let reg_plates;
+            if(location === 'all'){
+                reg_plates = await Services.platesData();
+            } else {
+                reg_plates = await Services.filterByTown(location);
+            }
+            let heading = 'Filtering by '+location ;
+            let town_list = await Services.townData();
+            res.render('report',{heading, reg_plates,town_list});
+        } catch (err) { res.send(err.stack)}
+        
     }
     async function reporting (req, res) {
         let name = req.body.username;
@@ -74,6 +82,7 @@ module.exports = function (pool) {
         reporting,
         plates,
         combinedData,
-        foundOrNotFOund
+        foundOrNotFOund,
+        reportFilter
     }
 }
