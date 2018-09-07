@@ -62,6 +62,7 @@ module.exports = function (pool) {
         selectTown,
         insertPlate,
         remove,
-        tryAddPlate
+        tryAddPlate,
+        selectPlate
     }
 }
