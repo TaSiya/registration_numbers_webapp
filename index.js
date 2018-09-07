@@ -48,6 +48,7 @@ app.get('/report/:town', PlateRoute.reportFilter);
 app.post('/reporting', PlateRoute.reporting);
 app.get('/allPlates', PlateRoute.combinedData);
 app.get('/allPlates/:which', PlateRoute.foundOrNotFOund);
+app.get('/reset', PlateRoute.removeAll);
 const PORT = process.env.PORT || 2018;
 app.listen(PORT, function () {
     console.log('Talk to me port... ' + PORT);

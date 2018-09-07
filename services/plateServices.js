@@ -34,6 +34,9 @@ module.exports = function (pool) {
         let found = await pool.query('SELECT * FROM towns INNER JOIN registration_numbers ON towns.id = registration_numbers.towns_id WHERE status=$1',[search]);
         return found.rows;
     }
+    async function remove () {
+        await pool.query('delete from registration_numbers');
+    }
     
     return {
         platesData,
@@ -43,6 +46,7 @@ module.exports = function (pool) {
         townData,
         filterByTown,
         selectTown,
-        insertPlate
+        insertPlate,
+        remove
     }
 }

@@ -84,6 +84,14 @@ module.exports = function (pool) {
             res.send(err.stack)
         }
     }
+    async function removeAll (req, res) {
+        try{
+            await Services.remove();
+            res.redirect('/');
+        } catch (err) {
+            res.send(err.stack)
+        }
+    }
     return {
         home,
         report,
@@ -91,6 +99,7 @@ module.exports = function (pool) {
         plates,
         combinedData,
         foundOrNotFOund,
-        reportFilter
+        reportFilter,
+        removeAll
     }
 }
