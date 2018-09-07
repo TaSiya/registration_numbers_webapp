@@ -23,7 +23,7 @@ module.exports = function (pool) {
             }
             let heading = 'Filtering by '+location ;
             let town_list = await Services.townData();
-            let town_name = ;
+            //let town_name = ;
             res.render('report',{heading, reg_plates,town_list});
         } catch (err) { res.send(err.stack)}
         
