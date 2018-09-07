@@ -8,7 +8,7 @@ create table towns(
 
 create table registration_numbers (
 	id serial not null primary key,
-    plates varchar(12) not null,
+    plates varchar(15) not null,
 	towns_id int,
 	status varchar(50) ,
 	foreign key (towns_id) references towns(id)
