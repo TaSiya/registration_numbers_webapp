@@ -6,7 +6,7 @@ env:
 node_js:  
   - "8.9.4"
 
-before_script:
+before_script: 
   - psql -c 'create database  registration_app_database;' -U postgres
   - psql -U postgres -d registration_app_database -a -f public/sqlFile(s)/sqlTemplate.sql
   - psql -U postgres -d registration_app_database -a -f public/sqlFile(s)/insertTowns.sql
