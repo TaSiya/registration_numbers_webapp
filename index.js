@@ -44,6 +44,7 @@ const PlateRoute = routes(pool);
 
 app.get('/', PlateRoute.home); 
 app.get('/report', PlateRoute.report);
+app.get('/report/:town', PlateRoute.report);
 app.post('/reporting', PlateRoute.reporting);
 // app.get('/allPlates', PlateRoute.plates);
 app.get('/allPlates', PlateRoute.combinedData);

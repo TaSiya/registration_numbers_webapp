@@ -11,6 +11,13 @@ module.exports = function (pool) {
         let town_list = await Services.townData();
         res.render('report',{heading, reg_plates, stylePlate, town_list});
     }
+    async function reportFilter (req, res) {
+        let location = req.params.town;
+
+        let heading = 'Filtering by '+location ;
+
+        res.render('report',{heading, reg_plates, stylePlate, town_list});
+    }
     async function reporting (req, res) {
         let name = req.body.username;
         if(name === '' || name === undefined){
