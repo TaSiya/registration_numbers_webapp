@@ -8,8 +8,8 @@ node_js:
 
 before_script: 
   - psql -c 'create database  registration_app_database;' -U postgres
-  - psql -U postgres -d registration_app_database -a -f /public/sqlFile(s)/sqlTemplate.sql
-  - psql -U postgres -d registration_app_database -a -f /public/sqlFile(s)/insertTowns.sql
+  - psql -U postgres -d registration_app_database -a -f sqlTemplate.sql
+  - psql -U postgres -d registration_app_database -a -f insertTowns.sql
 
 addons:
     apt:
