@@ -27,13 +27,21 @@ module.exports = function (pool) {
         
     }
     async function reporting (req, res) {
-        let name = req.body.username;
-        if(name === '' || name === undefined){
-            req.flash('info', "Please Enter a valid registration number")
-        } else {
-            req.flash('found', name)
-        }
-        res.redirect('report');
+        try{
+            let plate = req.body.username;
+            if(plate === '' || plate === undefined){
+                req.flash('info', "Please Enter a valid registration number")
+            } else {
+                req.flash('found', plate)
+                ////////?/ right here
+                let list = plate.split(' ');
+                let initial = list[0];
+                let town_list = await Services.selectTown(initial);
+                await Services.insertPlate(plate,town_list[0].id);
+            }
+            res.redirect('report');
+        } catch (err) { res.send(err.stack)}
+        
     }
     async function plates (req, res) {
         try{

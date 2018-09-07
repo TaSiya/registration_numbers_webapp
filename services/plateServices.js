@@ -10,6 +10,7 @@ module.exports = function (pool) {
     }
     async function selectTown (name) {
         let town = await pool.query('select * from towns where initials = $1',[name]);
+        return town.rows;
     }
     async function townData () {
         let result = await pool.query('select * from towns');
@@ -41,6 +42,7 @@ module.exports = function (pool) {
         foundOrNot,
         townData,
         filterByTown,
-        selectTown
+        selectTown,
+        insertPlate
     }
 }
