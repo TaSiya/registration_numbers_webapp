@@ -9,7 +9,7 @@ module.exports = function (pool) {
         let stylePlate = 'found';
         let reg_plates = await Services.platesData();
         let town_list = await Services.townData();
-        let town_name = 'all';
+        let town_name = town_list[5].town_name;
         res.render('report',{heading, reg_plates, stylePlate, town_list,town_name});
     }
     async function reportFilter (req, res) {
@@ -23,8 +23,9 @@ module.exports = function (pool) {
             }
             let heading = 'Filtering by '+location ;
             let town_list = await Services.townData();
-            //let town_name = ;
-            res.render('report',{heading, reg_plates,town_list});
+            let townList = await Services.selectByInitialsTown(location);
+            let town_name = townList[0].town_name;
+            res.render('report',{heading, reg_plates,town_list,town_name});
         } catch (err) { res.send(err.stack)}
         
     }
