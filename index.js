@@ -5,7 +5,8 @@ const session = require('express-session');
 const handle = require('express-handlebars');
 const bodyParser = require('body-parser');
 const pg = require('pg');
-const routes = require('./routes/plateRoutes');
+const Routes = require('./routes/plateRoutes');
+const Services = require('./services/plateServices');
 
 const app = express();
 const Pool = pg.Pool;
@@ -39,16 +40,16 @@ const pool = new Pool({
     connectionString,
     ssl: useSSL
 });
+const service = Services(pool);
+const plateRoute = Routes(service);
 
-const PlateRoute = routes(pool);
-
-app.get('/', PlateRoute.home); 
-app.get('/report', PlateRoute.report);
-app.get('/report/:town', PlateRoute.reportFilter);
-app.post('/reporting', PlateRoute.reporting);
-app.get('/allPlates', PlateRoute.combinedData);
-app.get('/allPlates/:which', PlateRoute.foundOrNotFOund);
-app.get('/reset', PlateRoute.removeAll);
+app.get('/', plateRoute.home); 
+app.get('/report', plateRoute.report);
+app.get('/report/:town', plateRoute.reportFilter);
+app.post('/reporting', plateRoute.reporting);
+app.get('/allPlates', plateRoute.combinedData);
+app.get('/allPlates/:which', plateRoute.foundOrNotFOund);
+app.get('/reset', plateRoute.removeAll);
 const PORT = process.env.PORT || 2018;
 app.listen(PORT, function () {
     console.log('Talk to me port... ' + PORT);

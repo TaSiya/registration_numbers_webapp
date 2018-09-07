@@ -1,6 +1,6 @@
-const plateServices = require('../services/plateServices');
-module.exports = function (pool) {
-    const Services = plateServices(pool);
+
+module.exports = function (Services) {
+
     async function home ( req, res) {
         res.render('./')
     }
