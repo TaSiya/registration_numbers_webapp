@@ -4,6 +4,10 @@ module.exports = function (pool) {
         let result = await pool.query('select * from registration_numbers');
         return result.rows;
     }
+    async function townData () {
+        let result = await pool.query('select * from towns');
+        return result.rows;
+    }
     async function countAll () {
         let count = await pool.query('select count(*) FROM registration_numbers');
         return count.rows[0].count;
@@ -27,6 +31,7 @@ module.exports = function (pool) {
         platesData,
         countAll,
         allData,
-        foundOrNot
+        foundOrNot,
+        townData
     }
 }

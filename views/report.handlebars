@@ -30,18 +30,28 @@
                 <h3>{{messages.info}}</h3>
                 <h3 class="{{stylePlate}}">{{messages.found}}</h3>
         </div>
-    </div>
-    <div class="w-100"></div>
+        <div class="w-100"></div>
      <div class="col">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    select town
                     {{town_name}}
                 </button>
-                {{#each town_list}}
+                
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/{{town_name}}">{{initials}}</a>
+                    {{#each town_list}}
+                    <a class="dropdown-item" href="/report/{{initials}}">{{town_name}}</a>
+                    {{/each}}
                 </div>
-                {{/each}}
+                
+                
+                <ul>
+                    {{#each reg_plates}}
+                    <li>{{plates}}</li>
+                    {{/each}}
+                </ul>
+                
             </div>
         </div>
+    </div>
 </div>

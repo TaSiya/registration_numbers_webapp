@@ -7,7 +7,9 @@ module.exports = function (pool) {
     async function report (req, res) {
         let heading = 'Hi, There. Our services are Free!'
         let stylePlate = 'found';
-        res.render('report',{heading,stylePlate});
+        let reg_plates = await Services.platesData();
+        let town_list = await Services.townData();
+        res.render('report',{heading, reg_plates, stylePlate, town_list});
     }
     async function reporting (req, res) {
         let name = req.body.username;
